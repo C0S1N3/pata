@@ -19,5 +19,5 @@ docs/
 .cursor/
 .claude/
 
-# AGPL 源码交付物，构建时生成
-cengcheng-src.zip
+# AGPL 源码交付物，构建时生成（不进仓库：内容就是本仓库自身）
+*-src.zip
