@@ -1,4 +1,4 @@
-# NOTICE — 层城（Slay the Web 简体中文版）
+# NOTICE — 爬塔（Slay the Web 简体中文版）
 
 本仓库是 **Slay the Web** 的修改版，按 GNU Affero 通用公共许可证第 3 版（AGPL-3.0）发布。
 
