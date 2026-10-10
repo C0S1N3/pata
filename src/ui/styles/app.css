@@ -7,6 +7,11 @@
 html {
 	min-height: 100%;
 	background-color: var(--bg);
+	/*
+	 * 主菜单与静态页（图鉴/手册/牌组编辑器）的底图。游戏内会被按楼层
+	 * 切换的 .App-background 盖住，所以这里只要一张镇场的气氛图。
+	 */
+	background-image: url("../images/scenes/summit-gate.jpg");
 	background-attachment: fixed;
 	background-position: 50%;
 	background-size: cover;
