@@ -21,7 +21,7 @@ export default function Console({
 	return html`
     <div class="Box">
       <section>
-        <h2><u>C</u>onsole</h2>
+        <h2><u>C</u> 控制台</h2>
         <${CommandInterface}
           game=${game}
           onRunAction=${onRunAction}
@@ -39,14 +39,14 @@ export default function Console({
             onClick=${onUndo}
             disabled=${past.length === 0}
           >
-            ← Undo
+            ← 撤销
           </button>
           <button
             class="Button"
             onClick=${onRedo}
             disabled=${redoStack.length === 0}
           >
-            Redo →
+            重做 →
           </button>
         </menu>
       </section>
@@ -55,13 +55,13 @@ export default function Console({
 }
 
 function ActionTimeline({past, onJumpToAction}) {
-	if (!past.length) return html`<p><em>No actions yet...</em></p>`
+	if (!past.length) return html`<p><em>还没有操作……</em></p>`
 
 	return html`
     <ol class="ActionTimeline" scroll>
       ${[...past].reverse().map((item, index) => {
 				const {action, state} = item
-				const meta = state ? `Turn ${state.turn || 0} • Floor ${state.dungeon?.y || 0}` : ''
+				const meta = state ? `第 ${state.turn || 0} 回合 · 第 ${state.dungeon?.y || 0} 层` : ''
 				return html`
           <li key=${index}>
             <div>
@@ -69,7 +69,7 @@ function ActionTimeline({past, onJumpToAction}) {
               ${meta && html`<br /><small>${meta}</small>`}
             </div>
             <button class="Button" onClick=${() => onJumpToAction(index)}>
-              Jump
+              跳转
             </button>
           </li>
         `
@@ -127,16 +127,16 @@ function CommandInterface({game, onRunAction, freeMapNav, onToggleFreeMapNav, on
 	const commands = {
 		hp: (args) => {
 			const amount = Number.parseInt(args[0], 10)
-			if (Number.isNaN(amount)) return {error: 'Usage: hp <amount>'}
+			if (Number.isNaN(amount)) return {error: '用法：hp <amount>'}
 			const action = amount < 0 ? 'removeHealth' : 'addHealth'
 			const absAmount = Math.abs(amount)
 			markAsCheat()
 			onRunAction(action, {target: 'player', amount: absAmount})
-			return {success: `${amount < 0 ? 'Removed' : 'Added'} ${absAmount} HP`}
+			return {success: `${amount < 0 ? '失去' : '获得'} ${absAmount} 点生命`}
 		},
 		energy: (args) => {
 			const amount = Number.parseInt(args[0], 10)
-			if (Number.isNaN(amount)) return {error: 'Usage: energy <amount>'}
+			if (Number.isNaN(amount)) return {error: '用法：energy <amount>'}
 			markAsCheat()
 			onRunAction('addEnergyToPlayer', {amount})
 			return {success: `Added ${amount} energy`}
@@ -161,7 +161,7 @@ function CommandInterface({game, onRunAction, freeMapNav, onToggleFreeMapNav, on
 		},
 		add: (args) => {
 			const cardName = args.join(' ')
-			if (!cardName) return {error: 'Usage: add <cardName>'}
+			if (!cardName) return {error: '用法：add <cardName>'}
 
 			// Case-insensitive search
 			const card = cards.find((c) => c.name.toLowerCase() === cardName.toLowerCase())
@@ -174,7 +174,7 @@ function CommandInterface({game, onRunAction, freeMapNav, onToggleFreeMapNav, on
 		},
 		remove: (args) => {
 			const cardName = args.join(' ')
-			if (!cardName) return {error: 'Usage: remove <cardName>'}
+			if (!cardName) return {error: '用法：remove <cardName>'}
 
 			// Case-insensitive search in deck
 			const card = game.state.deck.find((c) => c.name.toLowerCase() === cardName.toLowerCase())
@@ -186,7 +186,7 @@ function CommandInterface({game, onRunAction, freeMapNav, onToggleFreeMapNav, on
 		},
 		upgrade: (args) => {
 			const input = args.join(' ')
-			if (!input) return {error: 'Usage: upgrade <cardName> or upgrade all'}
+			if (!input) return {error: '用法：upgrade <cardName>，或 upgrade all'}
 
 			if (input.toLowerCase() === 'all') {
 				const toUpgrade = game.state.deck.filter((c) => !c.upgraded)
@@ -211,14 +211,14 @@ function CommandInterface({game, onRunAction, freeMapNav, onToggleFreeMapNav, on
 			return {success: `Upgraded ${card.name}`}
 		},
 		help: () => ({
-			info: `  hp <amount>        - Add/remove health (negative to damage)
-  energy <amount>    - Add energy
+			info: `  hp <amount>        - 增减生命值（负数即扣血）
+  energy <amount>    - 增加能量
   draw [amount]      - Draw cards (default: 1)
   kill               - Set all enemies to 1 HP
   map                - Toggle free map navigation
-  add <cardName>     - Add card to deck
-  remove <cardName>  - Remove card from deck
-  upgrade <cardName> - Upgrade specific card
+  add <cardName>     - 向牌组加入卡牌
+  remove <cardName>  - 从牌组移除卡牌
+  upgrade <cardName> - 升级指定卡牌
   upgrade all        - Upgrade all cards
   help               - Show this help
   clear              - Clear output`,

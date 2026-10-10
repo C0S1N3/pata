@@ -332,11 +332,11 @@ export const MapNodeTypes = {
 
 export function nodeTypeToName(nodeType) {
 	return {
-		start: 'Start room',
-		C: 'Campfire',
-		M: 'Monster',
-		E: 'Elite monster',
-		boss: 'Boss',
+		start: '起点',
+		C: '篝火',
+		M: '怪物',
+		E: '精英怪物',
+		boss: '首领',
 	}[nodeType]
 }
 

@@ -408,7 +408,8 @@ export function getSpriteStyle(rowOrCoords, col, spritesheet = 'monsters', scale
 	return {
 		width: `${displaySize}px`,
 		height: `${displaySize}px`,
-		backgroundImage: `url(/images/characters/32rogues/${spritesheet}.png)`,
+		// 相对文档（页面在 /toy/<slug>/index.html），不是相对脚本文件。
+		backgroundImage: `url(./images/characters/32rogues/${spritesheet}.png)`,
 		backgroundPosition: `-${x}px -${y}px`,
 		backgroundSize: `${scaledSheetWidth}px auto`,
 		imageRendering: 'pixelated',

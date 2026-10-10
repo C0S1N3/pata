@@ -1,9 +1,10 @@
 const flourish = {
 	name: 'Flourish',
+	zh: '生机勃发',
 	type: 'skill',
 	energy: 2,
 	target: 'player',
-	description: 'Gain 5 Regen. Can only be played if your health is below 50%.',
+	description: '获得 5 层再生。仅当生命值低于 50% 时可打出。',
 	image: '5.jpg',
 	powers: {
 		regen: 5,
@@ -23,6 +24,6 @@ export const upgrade = (card) => {
 	a.percentage = 75
 	return {
 		...card,
-		description: 'Gain 5 Regen. Can only be played if your health is below 75%.',
+		description: '获得 5 层再生。仅当生命值低于 75% 时可打出。',
 	}
 }

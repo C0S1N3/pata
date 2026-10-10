@@ -1,10 +1,11 @@
 // Succube.js
 export default {
 	name: 'Succube',
+	zh: '魅魔',
 	type: 'attack',
 	energy: 3,
 	target: 'allEnemies',
-	description: 'Deal 2 damage to ALL enemies and suck it into life.',
+	description: '对所有敌人造成 2 点伤害，并将其转化为生命。',
 	image: 'succube.png',
 	damage: 2,
 	actions: [
@@ -18,5 +19,6 @@ export const upgrade = (card) => ({
 	...card,
 	damage: 3,
 	name: 'High Succube+',
-	description: 'Deal 3 damage to ALL enemies and suck it into life.',
+	zh: '上位魅魔',
+	description: '对所有敌人造成 3 点伤害，并将其转化为生命。',
 })

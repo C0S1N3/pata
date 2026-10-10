@@ -41,7 +41,14 @@
 	margin: auto 0 0;
 }
 .Target-name {
-	display: none;
+	/*
+	 * 上游默认隐藏怪物名，只靠像素图辨认。汉化版改为显示：中文玩家对
+	 * 32rogues 素材没有既有认知，只看图认不出怪，而译名本来就是给人看的。
+	 */
+	display: block;
+	font-size: 0.75em;
+	font-weight: normal;
+	white-space: nowrap;
 }
 .Target-intent {
 	display: inline-block;

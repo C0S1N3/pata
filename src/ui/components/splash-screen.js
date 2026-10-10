@@ -1,5 +1,3 @@
-import {getRuns} from '../../game/backend.js'
-import {timeSince} from '../../utils.js'
 import gsap from '../animations.js'
 import {Component, html} from '../lib.js'
 import {DeckSelector} from './deck-selector.js'
@@ -8,7 +6,6 @@ export default class SplashScreen extends Component {
 	constructor() {
 		super()
 		this.state = {
-			runs: [],
 			selectedDeck: null,
 			selectingDeck: false,
 		}
@@ -19,9 +16,6 @@ export default class SplashScreen extends Component {
 
 	componentDidMount() {
 		gsap.from(this.base, {duration: 0.2, autoAlpha: 0, scale: 0.98})
-		// @ts-expect-error
-		gsap.to(this.base.querySelector('.Splash-spoder'), {delay: 5, x: 420, y: 60, duration: 3})
-		getRuns().then(({runs}) => this.setState({runs}))
 	}
 
 	handleDeckSelected(deck) {
@@ -40,21 +34,19 @@ export default class SplashScreen extends Component {
 	}
 
 	render(_props, state) {
-		const run = state.runs[0]
-
 		if (state.selectingDeck) {
 			return html`
 				<article class="Splash Container Container--vcenter">
 					<div class="Box">
 						<ul class="Options">
-							<li><button class="Button" onClick=${() => this.setState({selectingDeck: false})}>← Menu</button></li>
+							<li><button class="Button" onClick=${() => this.setState({selectingDeck: false})}>← 返回</button></li>
 						</ul>
 						<br/>
-						<h2>Choose a deck</h2>
+						<h2>选择一套牌组</h2>
 						<${DeckSelector} onSelectDeck=${(deck) => this.handleDeckSelected(deck)} />
 						<ul class="Options">
 							<li><hr /></li>
-							<li><a class="Button" href="/deck-builder">Deck builder →</a></li>
+							<li><a class="Button" href="./deck-builder.html">牌组编辑器 →</a></li>
 						</ul>
 					</div>
 				</article>
@@ -63,40 +55,30 @@ export default class SplashScreen extends Component {
 
 		return html`
 			<article class="Splash Container Container--vcenter">
-				<img class="Splash-spoder" src="/images/spoder.png" title="Oh hello" />
+				<img class="Splash-spoder" src="./images/spoder.png" title="你来啦" />
 				<div class="Box">
-					<h1 class="Title Splash-title">Slay the Web</h1>
+					<h1 class="Title Splash-title">层城</h1>
 					<ul class="Options">
 						${
 							location.hash
 								? html`
 									<li>
-										Found a saved game. <button class="Button" autofocus onClick=${this.props.onContinue}>Continue?</button>
+										发现一局未结束的游戏。<button class="Button" autofocus onClick=${this.props.onContinue}>继续？</button>
 									</li>
-									<li><button class="Button" onClick=${() => this.props.onNewGame()}>New Game</button></li>
+									<li><button class="Button" onClick=${() => this.props.onNewGame()}>重新开始</button></li>
 								`
 								: html`
-									<li><button class="Button primary" autofocus onClick=${() => this.props.onNewGame()}>Play</button></li>
-									<li><button class="Button" onClick=${this.startDeckSelection}>Play custom deck</button></li>
+									<li><button class="Button primary" autofocus onClick=${() => this.props.onNewGame()}>开始游戏</button></li>
+									<li><button class="Button" onClick=${this.startDeckSelection}>自选牌组</button></li>
 									<li><hr /></li>
-									<li><a class="Button" href="/?debug&tutorial">Tutorial</a></li>
-									<li><a class="Button" href="/deck-builder">Deck Builder</a></li>
+									<li><a class="Button" href="./index.html?debug&tutorial">教学</a></li>
+									<li><a class="Button" href="./deck-builder.html">牌组编辑器</a></li>
 								`
 						}
-						<li><a class="Button" href="/collection">Collection</a></li>
-						<li>
-							<a class="Button" href="/stats"
-								>Highscores
-								${
-									this.state.runs.length > 0 &&
-									html` <a class="LastRun" href=${`/stats/run?id=${run.id}`}>
-									Someone ${run.won ? 'won' : 'lost'} ${timeSince(run.createdAt)}
-								</a>`
-								}
-							</a>
-						</li>
-						<li><a class="Button" href="/manual">Manual</a></li>
-						<li><a class="Button" href="/changelog">Changelog</a></li>
+						<li><a class="Button" href="./collection.html">卡牌图鉴</a></li>
+						<li><a class="Button" href="./monsters.html">怪物图鉴</a></li>
+						<li><a class="Button" href="./manual.html">手册</a></li>
+						<li><a class="Button" href="./source/cengcheng-src.zip" download>源码</a></li>
 					</ul>
 				</div>
 			</article>

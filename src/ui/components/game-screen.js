@@ -430,7 +430,7 @@ export default class App extends Component {
 						<div class="Container">
 							<h1 center>你死了</h1>
 							<${DungeonStats} dungeon=${state.dungeon}><//>
-							<button class="Button" onClick=${() => this.props.onLoose()}>Try again?</button>
+							<button class="Button" onClick=${() => this.props.onLoose()}>再试一次？</button>
 						</div>
 					<//> `
 				}
@@ -441,7 +441,7 @@ export default class App extends Component {
 						<div class="Container CContainer--center">
 							<h1 center>你赢了！</h1>
 							<${DungeonStats} dungeon=${state.dungeon}><//>
-							<p center><button class="Button" onClick=${() => this.props.onWin()}>Continue</button></p>
+							<p center><button class="Button" onClick=${() => this.props.onWin()}>继续</button></p>
 						</div>
 					<//> `
 				}
@@ -477,7 +477,7 @@ export default class App extends Component {
 					html`
 						<div class="Targets Split">
 							<div class="Targets-group">
-								<${Player} model=${state.player} name="Player" />
+								<${Player} model=${state.player} name="你" />
 							</div>
 							<div class="Targets-group">
 								${room.monsters?.map((monster) => html`<${Monster} model=${monster} gameState=${state} />`)}
@@ -488,12 +488,12 @@ export default class App extends Component {
 							<div class="EnergyBadge">
 								<span
 									class="tooltipped tooltipped-e tooltipped-multiline"
-									aria-label="Cards costs energy and this badge shows how much you have left this turn. Next turn your energy is refilled."
+									aria-label="卡牌需要消耗能量，这里显示本回合剩余能量。每回合开始时会补满。"
 									>${state.player.currentEnergy}/${state.player.maxEnergy}</span
 								>
 							</div>
 							<p class="Actions">
-								<button class="Button EndTurn" onClick=${() => this.endTurn()}><u>E</u>nd turn</button>
+								<button class="Button EndTurn" onClick=${() => this.endTurn()}><u>E</u> 结束回合</button>
 							</p>
 						</div>
 
@@ -504,38 +504,38 @@ export default class App extends Component {
 				}
 
 				<${OverlayWithButton} id="Menu" topleft middle>
-					<button onClick=${() => this.toggleOverlay('#Menu')}><u>Esc</u>ape</button>
+					<button onClick=${() => this.toggleOverlay('#Menu')}><u>Esc</u> 菜单</button>
 					<div class="Overlay-content">
 							<${Menu} gameState=${state} game=${this.game} onUndo=${() => this.undo()} />
 					</div>
 				<//>
 
 				<${OverlayWithButton} id="Map" topright key=${1}>
-					<button align-right onClick=${() => this.toggleOverlay('#Map')}><u>M</u>ap</button>
+					<button align-right onClick=${() => this.toggleOverlay('#Map')}><u>M</u> 地图</button>
 					<div class="Overlay-content">
 						<${SlayMap} dungeon=${state.dungeon} x=${state.dungeon.x} y=${state.dungeon.y} scatter=${20} debug=${this.debugMode} freeNavigation=${this.freeMapNav} onSelect=${this.handleMapMove}><//>
 					</div>
 				<//>
 
 				<${OverlayWithButton} id="Deck" topright topright2>
-					<button class="tooltipped tooltipped-se" aria-label="All the cards you own" onClick=${() =>
-						this.toggleOverlay('#Deck')}><u>D</u>eck ${state.deck.length}</button>
+					<button class="tooltipped tooltipped-se" aria-label="你持有的全部卡牌" onClick=${() =>
+						this.toggleOverlay('#Deck')}><u>D</u> 牌组 ${state.deck.length}</button>
 					<div class="Overlay-content">
 						<${Cards} gameState=${state} type="deck" />
 					</div>
 				<//>
 
 				<${OverlayWithButton} id="DrawPile" bottomleft>
-					<button class="tooltipped tooltipped-ne" aria-label="The cards you'll draw next in random order" onClick=${() =>
-						this.toggleOverlay('#DrawPile')}>Dr<u>a</u>w pile ${state.drawPile.length}</button>
+					<button class="tooltipped tooltipped-ne" aria-label="接下来会抽到的牌，顺序随机" onClick=${() =>
+						this.toggleOverlay('#DrawPile')}><u>A</u> 抽牌堆 ${state.drawPile.length}</button>
 					<div class="Overlay-content">
 						<${Cards} gameState=${state} type="drawPile" />
 					</div>
 				<//>
 
 				<${OverlayWithButton} id="ExhaustPile" topleft topleft2>
-					<button class="tooltipped tooltipped-se" aria-label="The cards you have exhausted in this encounter" onClick=${() =>
-						this.toggleOverlay('#ExhaustPile')}>E<u>x</u>haust pile ${state.exhaustPile.length}</button>
+					<button class="tooltipped tooltipped-se" aria-label="本场战斗中已消耗的牌" onClick=${() =>
+						this.toggleOverlay('#ExhaustPile')}><u>X</u> 消耗堆 ${state.exhaustPile.length}</button>
 					<div class="Overlay-content">
 						<${Cards} gameState=${state} type="exhaustPile" />
 					</div>
@@ -545,7 +545,7 @@ export default class App extends Component {
 					<button onClick=${() =>
 						this.toggleOverlay(
 							'#DiscardPile',
-						)} align-right class="tooltipped tooltipped-nw tooltipped-multiline" aria-label="Cards you've already played. Once the draw pile is empty, these cards are shuffled into your draw pile.">Di<u>s</u>card pile ${
+						)} align-right class="tooltipped tooltipped-nw tooltipped-multiline" aria-label="已经打出的牌。抽牌堆空掉之后，这些牌会被洗回抽牌堆。"><u>S</u> 弃牌堆 ${
 						state.discardPile.length
 					}</button>
 					<div class="Overlay-content">

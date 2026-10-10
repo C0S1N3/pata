@@ -1,4 +1,5 @@
 import * as builtinDecks from '../../content/decks.js'
+import {displayName} from '../../i18n.js'
 import {html, useState} from '../lib.js'
 import {getCustomDecks} from '../storage-deck.js'
 
@@ -18,9 +19,9 @@ export function DeckSelector({onSelectDeck}) {
 				(deck) => html`
 					<li>
 						<button class="Button ${selectedDeck?.id === deck.id ? 'selected' : ''}" onClick=${() => select(deck)}>
-							${deck.name}
+							${displayName(deck)}
 							<small>
-								${deck.cards.length} cards, ${deck.custom ? 'custom' : 'built-in'}
+								${deck.cards.length} 张，${deck.custom ? '自定义' : '内置'}
 							</small>
 						</button>
 					</li>

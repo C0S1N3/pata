@@ -14,7 +14,7 @@ export default function VictoryRoom(props) {
 	const state = props.gameState
 	return html`
 		<div class="Container Container--center">
-			<h1 center>Victory!</h1>
+			<h1 center>胜利！</h1>
 			<h2 center>${pick(victoryRoomIntroTexts)}</h2>
 			${
 				!state.didPickCard &&
@@ -23,29 +23,29 @@ export default function VictoryRoom(props) {
 					animate
 					cards=${getCardRewards(3)}
 					didSelectCard=${(card) => props.onSelectCard(card)}
-					buttonLabel="Add to deck"
+					buttonLabel="加入牌组"
 					showUpgrades=${false}
 				/>
 			`
 			}
 			<ul class="Options">
-				<button class="Button" onClick=${props.onContinue}>Continue to the next room</button>
+				<button class="Button" onClick=${props.onContinue}>前往下一个房间</button>
 			</ul>
 		</div>
 	`
 }
 
 const victoryRoomIntroTexts = [
-	'A win under your belt and new cards on the table. Pick wisely.',
-	"Victory's sweet, but a new card? Sweeter.",
-	'Monster down, morale up.',
-	"Ah, the smell of defeat! Now, how 'bout we celebrate with some fresh cardboard?",
-	'Sure, you could skip the rewards. As you please.',
-	"You've slain, now you gain. What's it gonna be, hero?",
-	"Ah, victory! Don't linger too long; those cards won't pick themselves.",
-	'Where the cards are your oyster',
-	'Choose a card, any card!',
-	"Rewards await. But remember, a deck can't thrive on clutter. Unless you have corruption. Then it can.",
-	"Ah, the Victory Room, where today's choices are tomorrow's victories or, you know, defeats.",
-	"New cards up for grabs. Don't underestimate the power of fresh cardboard.",
+	'赢下一场，新牌也摆上了台面。挑得仔细些。',
+	'胜利很甜，但一张新牌更甜。',
+	'怪物倒下，士气上来。',
+	'啊，败北的味道！不如挑张新牌庆祝一下？',
+	'当然，你也可以不要奖励。随你。',
+	'杀过了，该拿了。选哪张，勇者？',
+	'胜利了！别磨蹭太久，牌可不会自己选自己。',
+	'牌海任你挑。',
+	'选一张，随便哪张！',
+	'奖励在等你。但记住，牌组塞太满可不行。',
+	'胜利之厅。今天的选择，就是明天的胜利——或者明天的败北。',
+	'新牌到手。别小看一张新卡的分量。',
 ]

@@ -1,9 +1,10 @@
 export default {
 	name: 'Summer of Sam',
+	zh: '山姆之夏',
 	type: 'skill',
 	energy: 1,
 	target: 'player',
-	description: 'Gain 1 Health. If your health is below 50% draw 2 cards.',
+	description: '回复 1 点生命。若生命值低于 50%，抽 2 张牌。',
 	image: 'bare-feet-of-god.jpg',
 	actions: [
 		{
@@ -33,6 +34,6 @@ export const upgrade = (card) => {
 	a.parameter.amount = 2
 	return {
 		...card,
-		description: 'Gain 2 Health. If your health is below 50% draw 2 cards.',
+		description: '回复 2 点生命。若生命值低于 50%，抽 2 张牌。',
 	}
 }

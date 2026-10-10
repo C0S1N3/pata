@@ -1,3 +1,4 @@
+import {cardName, cardTypeLabel} from '../../i18n.js'
 import {canPlay} from '../../game/conditions.js'
 import {Component, html} from '../lib.js'
 
@@ -38,10 +39,10 @@ export function Card(props) {
 					<span>${card.energy}</span>
 				</p>
 				<figure class="Card-media">
-					<img src=${image} alt=${card.name} />
+					<img src=${image} alt=${cardName(card)} />
 				</figure>
-				<p class="Card-type">${card.type}</p>
-				<h3 class="Card-name">${card.name}</h3>
+				<p class="Card-type">${cardTypeLabel(card.type)}</p>
+				<h3 class="Card-name">${cardName(card)}</h3>
 				<p class="Card-description">${card.description}</p>
 			</div>
 		</stw-card>

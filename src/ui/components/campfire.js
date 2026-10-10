@@ -27,9 +27,9 @@ export default class CampfireRoom extends Component {
 		if (isCurrRoomCompleted(gameState)) {
 			return html`
 			<div class="Container Container--center">
-				<h1 center>You've already made a choice</h1>
+				<h1 center>你已经做过选择了</h1>
 				<p center>
-					<button class="Button" onClick=${props.onContinue}>Continue to the next room</button>
+					<button class="Button" onClick=${props.onContinue}>前往下一个房间</button>
 				</p>
 			</div>
 		`
@@ -37,17 +37,17 @@ export default class CampfireRoom extends Component {
 
 		let labelButton = ''
 		if (choice === 'upgradeCard') {
-			label = 'Choose a card to upgrade'
-			labelButton = 'Upgrade card'
+			label = '选择一张要升级的牌'
+			labelButton = '升级卡牌'
 		}
 		if (choice === 'removeCard') {
-			label = 'Choose a card to remove'
-			labelButton = 'Remove card'
+			label = '选择一张要移除的牌'
+			labelButton = '移除卡牌'
 		}
 
 		return html`
 			<div class="Container Container--center">
-				<h1 center>Campfire</h1>
+				<h1 center>篝火</h1>
 				<p center>${pick(campfireIntroTexts)}</p>
 
 						${
@@ -55,9 +55,9 @@ export default class CampfireRoom extends Component {
 							html`
 				<div class="Box">
 					<ul class="Options">
-									<li><button class="Button" onClick=${() => this.rest()}>Rest</button></li>
-									<li><button class="Button" onClick=${() => this.choose('upgradeCard')}>Upgrade card</button></li>
-									<li><button class="Button" onClick=${() => this.choose('removeCard')}>Remove card</button></li>
+									<li><button class="Button" onClick=${() => this.rest()}>休息</button></li>
+									<li><button class="Button" onClick=${() => this.choose('upgradeCard')}>升级卡牌</button></li>
+									<li><button class="Button" onClick=${() => this.choose('removeCard')}>移除卡牌</button></li>
 					</ul>
 				</div>
 								`
@@ -79,8 +79,8 @@ export default class CampfireRoom extends Component {
 				<p center>
 					${
 						isChoosingCard
-							? html`<button class="Button" onClick=${() => this.setState({isChoosingCard: false})}>Cancel</button>`
-							: html`<button class="Button" onClick=${() => this.props.onContinue()}>No thanks, I'm good</button>`
+							? html`<button class="Button" onClick=${() => this.setState({isChoosingCard: false})}>取消</button>`
+							: html`<button class="Button" onClick=${() => this.props.onContinue()}>不用了，就这样</button>`
 					}
 				</p>
 
@@ -90,12 +90,12 @@ export default class CampfireRoom extends Component {
 }
 
 const campfireIntroTexts = [
-	"The fire's warmth beckons. Rest now, and reclaim your strength for what comes next.",
-	"A glowing campfire invites you to rest. Your stamina's just as vital as your deck.",
-	"The firelight shines on your cards. Perfect time to hone their power, don't you think?",
-	"Campfire's blaze illuminates your deck. Could an upgrade tip the next battle in your favor?",
-	"Sitting by the fire, you ponder your deck. Perhaps it's time to let go of a card?",
-	'The fire flickers as you sift through your cards. Sometimes less is more.',
-	'Campfire ahead. A rare moment of peace. How will you seize it?',
-	'Firelight glows on your cards. Each choice here could be the edge you need.',
+	'火光在招呼你。歇一歇，把力气收回来，好走接下来的路。',
+	'篝火明亮，正适合休整。体力和牌组一样要紧。',
+	'火光落在你的牌上。趁现在磨一磨它们，如何？',
+	'火光照亮你的牌组。升一张，下一战会不会就不一样了？',
+	'坐在火边翻看牌组。也许该丢掉一张了？',
+	'火苗晃动，你翻着牌。有时少即是多。',
+	'前方是篝火。难得的安宁，你要怎么用？',
+	'火光映着你的牌。这里的每个选择，都可能是你缺的那点优势。',
 ]

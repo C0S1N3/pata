@@ -61,6 +61,7 @@ export class Card {
 	constructor(props) {
 		this.id = uuid()
 		this.name = props.name
+		this.zh = props.zh
 		this.type = CardTypes[props.type]
 		this.energy = props.energy
 		this.target = CardTargets[props.target]
