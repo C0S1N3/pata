@@ -1,9 +1,12 @@
 /**
- * 把本仓库的完整源码打包成 dist/source/cengcheng-src.zip。
+ * 把本仓库的完整源码打包成仓库根目录下的 cengcheng-src.zip。
  *
  * AGPL-3.0 第 13 条要求：通过网络提供修改版服务的人，必须向使用者提供
- * 对应的完整源码。本作品发布在 Bilibili Toy 上（属于网络提供服务），
- * 因此把源码随构建产物一起分发，并在作品内提供下载入口。
+ * 对应的完整源码。这个包就是用来履行该义务的交付物。
+ *
+ * 注意：产物刻意放在 dist/ 之外。Bilibili Toy 的上传端只放行白名单扩展名
+ * （.html/.js/.css/图片/.bin/.dat 等），.zip 与 .txt 会被丢弃，实测上传后
+ * 请求这类文件返回 404。所以压缩包不进 Toy 包体，改为另行提供下载。
  *
  * 纯 Node 实现（zlib deflate），不依赖外部 zip 工具。
  */
@@ -13,7 +16,7 @@ import path from 'node:path'
 import {deflateRawSync} from 'node:zlib'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
-const OUT = path.join(ROOT, 'dist', 'source', 'cengcheng-src.zip')
+const OUT = path.join(ROOT, 'cengcheng-src.zip')
 const PREFIX = 'cengcheng-src/'
 
 // 需要随源码分发的路径（文件或目录）
