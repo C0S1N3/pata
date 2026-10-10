@@ -50,7 +50,7 @@ export const Monster = (props) => {
 
 		return html`
 			<div class="Target-intent ${tooltip && 'tooltipped tooltipped-n'}" aria-label=${tooltip}>
-				<img alt=${type} src=${`/images/${type}.png`} /> ${amount}
+				<img alt=${type} src=${`./images/${type}.png`} /> ${amount}
 			</div>
 		`
 	}

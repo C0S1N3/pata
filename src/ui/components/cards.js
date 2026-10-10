@@ -21,7 +21,7 @@ export function Card(props) {
 	// 	render() {
 	const {card, gameState} = props
 	const isDisabled = !canPlay(gameState, card)
-	const image = card.image ? `/images/cards/${card.image}` : '/images/cards/fallback.jpg'
+	const image = card.image ? `./images/cards/${card.image}` : './images/cards/fallback.jpg'
 
 	return html`
 		<stw-card

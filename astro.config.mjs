@@ -1,13 +1,14 @@
 import {defineConfig} from 'astro/config'
 import preact from '@astrojs/preact'
 
-// https://astro.build/config
 export default defineConfig({
 	srcDir: './src/ui',
-	vite: {
-		build: {
-			sourcemap: true,
-		},
+	base: './',
+	trailingSlash: 'never',
+	build: {
+		format: 'file',
+		assetsPrefix: './',
+		sourcemap: false,
 	},
 	devToolbar: {
 		enabled: false

@@ -10,7 +10,7 @@ input,
 .driver-popover .driver-popover-title,
 .driver-popover .driver-popover-description,
 .driver-popover .driver-popover-footer button {
-	font-family: "heliotrope_4", serif;
+	font-family: var(--font-body);
 	font-feature-settings:
 		"kern" 1,
 		"liga" on;
