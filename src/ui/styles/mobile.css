@@ -1,0 +1,265 @@
+/*
+ * 移动端适配。
+ *
+ * 上游按桌面横屏（约 1280×800）设计，在手机上两类问题：
+ *
+ * 1) 窄屏（手机竖屏，典型 390×844）
+ *    - 手牌 `.Cards` 是 `nowrap` 且每张卡 `margin-left: -1.5rem` 做扇形叠放，
+ *      390px 宽塞 5 张 10em 宽的卡会被 flex-shrink 压到 70-90px，
+ *      卡面文字挤成一团且被视口下沿切掉。
+ *    - 顶栏四个按钮是各自绝对定位、按 em 固定偏移（left:10rem / right:5rem），
+ *      窄屏下「消耗堆」和「牌组」必然互相压字。
+ *    - 地图节点 4rem × 6 列 ≈ 408px，超出屏宽被 `.Overlay-content`
+ *      的 `overflow-x: hidden` 裁掉。
+ *
+ * 2) 矮屏（手机横屏，典型 844×390）
+ *    - `.App` 是 `min-height: 100vh; overflow: hidden`，而卡牌 17em≈315px
+ *      加 `.Hand` 的 `translateY(2rem)` 下推，手牌几乎全部跑到视口之外，
+ *      只剩顶部几十像素，无法出牌。
+ *
+ * 处理原则：窄屏让手牌换行、取消叠放（宁可丢扇形观感也要能读能点）；
+ * 矮屏压缩卡牌高度并去掉下推，保证卡名与描述都在屏内。
+ */
+
+/* ── 窄屏：手机竖屏 ─────────────────────────────────────── */
+@media (max-width: 560px) {
+	:root {
+		--card-width: 5.4em;
+		--card-height: 8.6em;
+	}
+
+	/* 手牌换行排布，取消叠放，卡面完整可读 */
+	.Hand {
+		transform: none;
+		margin-top: 0.4rem;
+	}
+	.Hand .Cards {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+	.Hand .Card {
+		margin-left: 0;
+	}
+	.Hand .Card .Card-media img {
+		height: 52px;
+	}
+	.Card-name {
+		font-size: 0.9rem;
+		padding-top: 0.3rem;
+	}
+	.Card-description {
+		font-size: 0.78rem;
+	}
+	.Card-type {
+		font-size: 0.68rem;
+	}
+
+	/* 顶栏：收紧字号与偏移，避免相邻按钮压字 */
+	.Overlay > button {
+		font-size: 0.75rem;
+		padding: 0.5rem 0.35rem;
+	}
+	.Overlay[topleft2] > button {
+		left: 6.5rem;
+	}
+	.Overlay[topright2] > button {
+		right: 3.4rem;
+	}
+	/* 底部牌堆计数上抬，别和手牌叠在一起 */
+	.Overlay[bottomleft] > button,
+	.Overlay[bottomright] > button {
+		padding: 0.3rem 0.45rem;
+	}
+
+	/* 地图：节点缩小，否则 6 列横向溢出被裁 */
+	slay-map {
+		--nodeSize: 1.1em;
+		padding: 0.4em;
+		min-height: 100vh;
+	}
+	slay-map-node {
+		width: 2.6rem;
+		height: 2.6rem;
+	}
+	slay-map-node[node-type="start"],
+	slay-map-node[node-type="boss"] {
+		width: 5.5rem;
+		height: 5.5rem;
+	}
+	slay-map-node[node-type="boss"] {
+		font-size: 3rem;
+		border-width: 0.35rem;
+	}
+	slay-map-row {
+		min-height: 7dvh;
+	}
+
+	/* 怪物图鉴：同一遭遇的怪物是横排的，窄屏会撑破页宽 */
+	.MonsterRooms [row] {
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.MonsterRooms > div > div {
+		max-width: 100%;
+	}
+
+	/*
+	 * 战斗区。`.Targets.Split` 是 1fr 1fr 的两列 grid，玩家与怪物各占一半；
+	 * 390px 宽下怪物那半只有 195px，而一个 Target 光精灵图加内边距就要约
+	 * 98px，两只怪就撑破、三只必被 `.Targets{overflow:hidden}` 裁掉，
+	 * 被裁掉的怪拖不到，房间永远打不完。
+	 * 竖屏纵向空间充裕，改为玩家一行、怪物一行，怪物多了还能换行。
+	 */
+	.Targets.Split {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		align-content: center;
+		gap: 0.25rem;
+	}
+	.Targets-group {
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+	/*
+	 * flex 项默认 min-width:auto，会被内容（精灵图＋血条）撑到无法并排，
+	 * 于是两只怪各占一整行，三怪房就竖向超限。放开最小宽度让它们共享一行。
+	 */
+	.Targets .Target {
+		margin-top: 0;
+		padding: 0.5em 0.3em 0.3em;
+		max-width: none;
+		min-width: 0;
+	}
+	.Targets .Target-header {
+		min-width: 0;
+		margin: 0 0.2rem 0;
+		gap: 0.2em;
+	}
+	.Targets .Target-name {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.Targets .Target-sprite {
+		transform: scale(0.62);
+	}
+	.Targets .Healthbar-label span {
+		font-size: 1rem;
+	}
+}
+
+/* ── 矮屏：手机横屏 ─────────────────────────────────────── */
+@media (max-height: 500px) {
+	:root {
+		--card-width: 6em;
+		--card-height: 7.6em;
+	}
+
+	/*
+	 * 上游在 min-width:800px 时把血条文字放大 1.5 倍，本意是宽屏桌面。
+	 * 但横屏手机宽度往往 ≥800px，于是这条也生效，把本就紧张的高度
+	 * 又吃掉一截。这里按高度把它还原。
+	 */
+	.Healthbar-label span {
+		transform: none;
+	}
+	.Healthbar {
+		margin: 0.1em 0;
+	}
+
+	/* 主菜单：7 个按钮 + 内边距在 390px 高度下装不下，整体收紧 */
+	.Box {
+		margin: 0.25rem auto;
+		padding: 0.35rem 0.5rem;
+	}
+	.Options {
+		gap: 0.2rem;
+	}
+	.Options + .Options {
+		margin-top: 0.2rem;
+	}
+	.Splash .Button,
+	.Options .Button {
+		font-size: 0.75rem;
+		padding: 0.25em 0.5rem;
+	}
+	.Splash .Box :is(h2, h3) {
+		font-size: 0.95rem;
+		margin: 0.2rem 0;
+	}
+	.Splash-title {
+		font-size: max(14px, min(11vmin, 6rem));
+		bottom: 1%;
+	}
+
+	/*
+	 * 手牌改为贴在视口底部。
+	 * 矮屏的根问题是垂直空间不够：`.App` 是列向 flex 且 overflow:hidden，
+	 * 战斗区占掉高度后手牌没地方放。让手牌脱离文档流固定在底部，
+	 * 战斗区就能用满整个高度，手牌也不会被推到屏外。
+	 */
+	.Hand {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 2;
+		transform: none;
+		margin-top: 0;
+	}
+	.Hand .Cards {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.Hand .Card {
+		margin-left: -0.7rem;
+	}
+	/* 卡图再矮一档，把空间留给卡名与描述 */
+	.Hand .Card .Card-media img {
+		height: 40px;
+	}
+	.Card-name {
+		font-size: 0.8rem;
+		padding-top: 0.2rem;
+		padding-bottom: 0;
+	}
+	.Card-description {
+		font-size: 0.72rem;
+		min-height: 1.8em;
+	}
+	.Card-type {
+		font-size: 0.62rem;
+		padding: 1px 4px 3px;
+	}
+
+	/* 顶栏 */
+	.Overlay > button {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.5rem;
+	}
+
+	/* 战斗区整体收紧，给手牌让出高度 */
+	.Target-header .Target-sprite {
+		transform: scale(0.7);
+		transform-origin: center;
+	}
+
+	/* 地图节点 */
+	slay-map {
+		--nodeSize: 1.2em;
+		min-height: 150vh;
+	}
+	slay-map-node {
+		width: 3rem;
+		height: 3rem;
+	}
+	slay-map-node[node-type="start"],
+	slay-map-node[node-type="boss"] {
+		width: 6rem;
+		height: 6rem;
+	}
+	slay-map-node[node-type="boss"] {
+		font-size: 3.2rem;
+	}
+}

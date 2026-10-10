@@ -11,6 +11,8 @@
 @import "./map.css";
 @import "./tooltipped.css";
 @import "./console.css";
+/* 移动端覆盖，放在最后以便覆盖上面的桌面规则 */
+@import "./mobile.css";
 
 /** Styles in this file should probably be moved into dedicated files */
 
