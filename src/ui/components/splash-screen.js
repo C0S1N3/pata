@@ -78,7 +78,6 @@ export default class SplashScreen extends Component {
 						<li><a class="Button" href="./collection.html">卡牌图鉴</a></li>
 						<li><a class="Button" href="./monsters.html">怪物图鉴</a></li>
 						<li><a class="Button" href="./manual.html">手册</a></li>
-						<li><a class="Button" href="./source/cengcheng-src.zip" download>源码</a></li>
 					</ul>
 				</div>
 			</article>

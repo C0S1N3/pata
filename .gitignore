@@ -17,3 +17,6 @@ docs/
 .astro/
 .env.local
 .cursor/
+
+# AGPL 源码交付物，构建时生成
+cengcheng-src.zip
