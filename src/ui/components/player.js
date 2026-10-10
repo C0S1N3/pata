@@ -1,3 +1,4 @@
+import {displayName} from '../../i18n.js'
 import {
 	poison as poisonPower,
 	regen as regenPower,
@@ -39,11 +40,11 @@ export const Monster = (props) => {
 		if (type === 'damage' && vulnerable) amount = vulnerablePower.use(amount)
 
 		let tooltip = ''
-		if (type === 'damage') tooltip = `Will deal ${amount} damage`
-		if (type === 'block') tooltip = `Will block for ${amount}`
-		if (type === 'weak') tooltip = `Will apply ${amount} Weak`
-		if (type === 'vulnerable') tooltip = `Will apply ${amount} Vulnerable`
-		if (type === 'poison') tooltip = `Will apply ${amount} Poison`
+		if (type === 'damage') tooltip = `将造成 ${amount} 点伤害`
+		if (type === 'block') tooltip = `将获得 ${amount} 点格挡`
+		if (type === 'weak') tooltip = `将施加 ${amount} 层虚弱`
+		if (type === 'vulnerable') tooltip = `将施加 ${amount} 层易伤`
+		if (type === 'poison') tooltip = `将施加 ${amount} 层中毒`
 
 		// Don't reveal how many stacks will be applied.
 		if (type === 'vulnerable' || type === 'weak') amount = undefined
@@ -56,7 +57,7 @@ export const Monster = (props) => {
 	}
 
 	return html`
-		<${Target} ...${props} type="enemy" name=${monster.name}>
+		<${Target} ...${props} type="enemy" name=${displayName(monster)}>
 			${intent && Object.entries(intent).map((intent) => MonsterIntent(intent))}
 		<//>
 	`
@@ -127,7 +128,7 @@ const Powers = (props) => {
 const Power = ({power, amount}) => {
 	if (!amount) return null
 	return html`<span class="tooltipped tooltipped-s" aria-label=${power.description}>
-		${power.name} ${amount}
+		${displayName(power)} ${amount}
 	</span>`
 }
 

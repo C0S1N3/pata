@@ -1,5 +1,6 @@
 export default {
 	name: 'Bash',
+	zh: '痛击',
 	type: 'attack',
 	energy: 2,
 	damage: 8,
@@ -8,14 +9,14 @@ export default {
 	powers: {
 		vulnerable: 2,
 	},
-	description: 'Deal 8 damage. Apply 2 Vulnerable.',
+	description: '造成 8 点伤害。施加 2 层易伤。',
 }
 
 export const upgrade = (card) => {
 	return {
 		...card,
 		damage: 10,
-		description: 'Deal 10 damage. Apply 3 Vulnerable',
+		description: '造成 10 点伤害。施加 3 层易伤。',
 		powers: {
 			vulnerable: 3,
 		},

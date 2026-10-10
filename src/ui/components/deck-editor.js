@@ -1,5 +1,6 @@
 import {cards} from '../../content/cards.js'
 import {createCard} from '../../game/cards.js'
+import {displayName} from '../../i18n.js'
 import {deleteDeck, saveDeck} from '../../ui/storage-deck.js'
 import {html, useEffect, useState} from '../lib.js'
 import {Card} from './cards.js'
@@ -8,16 +9,16 @@ function DeckForm({deckName, onNameChange, onSave, onDelete}) {
 	return html`
 		<form onSubmit=${onSave}>
 			<label>
-				Name <input type="text" value=${deckName} onInput=${(e) => onNameChange(e.target.value)} />
+				名称 <input type="text" value=${deckName} onInput=${(e) => onNameChange(e.target.value)} />
 			</label>
-			<button type="submit" class="Button">Save deck</button>
-			<button type="button" onClick=${onDelete} class="Button" danger>Delete deck</button>
+			<button type="submit" class="Button">保存牌组</button>
+			<button type="button" onClick=${onDelete} class="Button" danger>删除牌组</button>
 		</form>
 	`
 }
 
 function SelectedCards({selectedCards, onRemove}) {
-	if (!selectedCards.length) return html`<p center>Empty deck, add some cards!</p>`
+	if (!selectedCards.length) return html`<p center>牌组是空的，加点牌吧！</p>`
 
 	return html`
 		<div class="Cards Cards--grid Cards--mini">
@@ -35,7 +36,7 @@ function SelectedCards({selectedCards, onRemove}) {
 
 function AvailableCards({onAdd}) {
 	return html`
-		<h3>Available Cards</h3>
+		<h3>可选卡牌</h3>
 		<div class="Cards Cards--grid Cards--mini">
 			${cards.map(
 				(card) => html`
@@ -76,7 +77,7 @@ export function DeckEditor({deck, onSaveDeck, onDeleteDeck}) {
 	function handleDeleteDeck() {
 		if (!deck?.id) return
 
-		if (confirm(`Are you sure you want to delete the deck "${deck.name}"?`)) {
+		if (confirm(`确定要删除牌组「${displayName(deck)}」吗？`)) {
 			deleteDeck(deck.id)
 			if (onDeleteDeck) onDeleteDeck(deck.id)
 		}

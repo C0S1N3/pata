@@ -13,6 +13,7 @@
 		"test:watch": "ava --watch",
 		"test:coverage": "c8 ava",
 		"build": "astro build",
+		"build:toy": "astro build && node scripts/pack-source.mjs",
 		"preview": "astro preview",
 		"release": "release-it"
 	},

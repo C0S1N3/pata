@@ -3,12 +3,12 @@ import {html} from '../lib.js'
 export default function DungeonStats({dungeon}) {
 	const stats = getEnemiesStats(dungeon)
 	return html`
-		<h2>Dungeon stats</h2>
+		<h2>本局战绩</h2>
 		<ul>
-			<li>Enemies encountered: ${stats.encountered}</li>
-			<li>Enemies killed: ${stats.killed}</li>
-			<li>Total enemies health: ${stats.maxHealth}</li>
-			<li>Final health count: ${stats.finalHealth}</li>
+			<li>遭遇敌人：${stats.encountered}</li>
+			<li>击杀敌人：${stats.killed}</li>
+			<li>敌人总生命：${stats.maxHealth}</li>
+			<li>剩余生命合计：${stats.finalHealth}</li>
 		</ul>
 	`
 }

@@ -3,37 +3,33 @@ import Layout from '../layouts/Layout.astro'
 import '../styles/index.css'
 
 import {cards} from '../../content/cards.js'
+import {cardName} from '../../i18n.js'
 import CardPair from '../components/card-pair.js'
 ---
 
-<Layout title="Collection, Slay the Web">
+<Layout title="卡牌图鉴 · 层城">
 	<article class="Container">
-		<p><a class="Button" href="/">&larr; Menu</a></p>
+		<p><a class="Button" href="./index.html">&larr; 返回</a></p>
 
 		<header class="Header">
-			<h1 medium>Slay the Web</h1>
-			<h2>{cards.length} Card Collection</h2>
+			<h1 medium>层城</h1>
+			<h2>{cards.length} 张卡牌</h2>
 		</header>
 
 		<div class="Box Box--text">
-			<p>Would you like to create your own card? Or tune an existing one?</p>
+			<p>左边是卡牌本来的样子，右边是升级之后的样子。</p>
 			<p>
-				This game is <a href="https://github.com/oskarrough/slaytheweb" rel="noreferrer" target="_blank"
-					>is open source</a
-				>. You can change any part of the game. If you like, there's a chat on <a
-					href="https://matrix.to/#/#slaytheweb:matrix.org"
-					rel="noreferrer"
-					target="_blank"
-				>
-					#slaytheweb:matrix.org
-				</a> and I'll help you get started.
+				想自己做一张牌，或者调整现有的？本作是开源项目，源代码在
+				<a href="./manual.html">手册</a>页可以下载，随便改。
 			</p>
-			<p></p>
 		</div>
 
 		<div class="Box Box--text Box--full">
 			<div class="Cards Cards--grid Cards--withUpgrades">
-				{cards.map((card) => <CardPair card={card} gameState={{}} client:load />)}
+				{cards
+					.slice()
+					.sort((a, b) => cardName(a).localeCompare(cardName(b), 'zh-Hans-CN'))
+					.map((card) => <CardPair card={card} gameState={{}} client:load />)}
 			</div>
 		</div>
 	</article>

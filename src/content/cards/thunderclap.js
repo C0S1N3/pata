@@ -1,5 +1,6 @@
 export default {
 	name: 'Thunderclap',
+	zh: '雷鸣',
 	type: 'attack',
 	energy: 1,
 	damage: 4,
@@ -7,7 +8,7 @@ export default {
 	powers: {
 		vulnerable: 1,
 	},
-	description: 'Deal 4 damage. Apply 1 Vulnerable to ALL enemies.',
+	description: '造成 4 点伤害。对所有敌人施加 1 层易伤。',
 	image: '4.jpg',
 }
 
@@ -15,6 +16,6 @@ export const upgrade = (card) => {
 	return {
 		...card,
 		damage: 6,
-		description: 'Deal 6 damage. Apply 1 Vulnerable to ALL enemies.',
+		description: '造成 6 点伤害。对所有敌人施加 1 层易伤。',
 	}
 }

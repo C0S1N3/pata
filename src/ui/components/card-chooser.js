@@ -44,13 +44,6 @@ export default class CardChooser extends Component {
 		const hasUpgrades = props.showUpgrades !== false && props.cards.some((card) => !card.upgraded)
 		const showButton = props.buttonLabel !== undefined
 
-		console.log('CardChooser:', {
-			cardsLength: props.cards.length,
-			cards: props.cards.map((c) => ({name: c.name, upgraded: c.upgraded})),
-			hasUpgrades,
-			showButton,
-		})
-
 		return html`
 			<article class="RewardsBox">
 				<div class="Cards ${hasUpgrades ? 'Cards--withUpgrades' : ''}">

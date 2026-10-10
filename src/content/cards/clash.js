@@ -1,6 +1,7 @@
 // Clash.js
 export default {
 	name: 'Clash',
+	zh: '激战',
 	type: 'attack',
 	energy: 0,
 	damage: 14,
@@ -11,12 +12,12 @@ export default {
 			cardType: 'attack',
 		},
 	],
-	description: 'Can only be played if every card in your hand is an Attack. Deal 14 damage.',
+	description: '仅当手牌全部为攻击牌时可打出。造成 14 点伤害。',
 	image: 'h-sperling-horrified.jpg',
 }
 
 export const upgrade = (card) => ({
 	...card,
 	damage: 17,
-	description: 'Can only be played if every card in your hand is an Attack. Deal 17 damage.',
+	description: '仅当手牌全部为攻击牌时可打出。造成 17 点伤害。',
 })

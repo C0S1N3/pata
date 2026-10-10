@@ -1,4 +1,5 @@
 import {createCard} from '../../game/cards.js'
+import {displayName} from '../../i18n.js'
 import {uuid} from '../../utils.js'
 import {Card} from '../components/cards.js'
 import {DeckEditor} from '../components/deck-editor.js'
@@ -11,21 +12,20 @@ export function DeckEditorApp() {
 	function createNewDeck() {
 		setDeck({
 			id: uuid(),
-			name: `My deck ${uuid()}`,
+			name: `我的牌组 ${uuid()}`,
 			custom: true,
 		})
 	}
 
 	return html`
 		<div class="Box">
-			<h2>Deck Builder</h2>
+			<h2>牌组编辑器</h2>
 			<p>
-				Slay the Web comes with a standard, classic deck. Now you can also create your own decks from the
-				existing cards. Custom decks are, for now, only stored in your own browser. If you think others might
-				find your deck fun, <a href="/manual">please contribute</a>!
+				游戏自带一套经典牌组，你也可以用现有卡牌组一套自己的。自定义牌组目前只存在你自己的浏览器里。
+				想把它分享给别人，<a href="./manual.html">看看手册</a>。
 			</p>
 			<ul class="Options">
-				<li><button class="Button" onClick=${createNewDeck}>New custom deck</button></li>
+				<li><button class="Button" onClick=${createNewDeck}>新建自定义牌组</button></li>
 			</ul>
 		</div>
 
@@ -52,7 +52,7 @@ function DeckPreview({deck}) {
 
 	return html`
 		<div class="Box">
-			<h3>${deck.name} <small>(Built-in deck)</small></h3>
+			<h3>${displayName(deck)} <small>（内置牌组）</small></h3>
 			<div class="Cards Cards--grid Cards--mini">
 				${deck.cards.map((cardName) => html` <${Card} key=${cardName} card=${createCard(cardName)} /> `)}
 			</div>

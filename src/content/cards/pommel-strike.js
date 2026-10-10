@@ -1,9 +1,10 @@
 export default {
 	name: 'Pommel Strike',
+	zh: '剑柄打击',
 	type: 'attack',
 	energy: 1,
 	target: 'enemy',
-	description: 'Deal 9 damage. Draw 1 card.',
+	description: '造成 9 点伤害。抽 1 张牌。',
 	image: '8.jpg',
 	damage: 9,
 	actions: [
@@ -22,6 +23,6 @@ export const upgrade = (card) => {
 	return {
 		...card,
 		damage: 10,
-		description: 'Deal 10 damage. Draw 2 cards',
+		description: '造成 10 点伤害。抽 2 张牌。',
 	}
 }

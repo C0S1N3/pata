@@ -1,5 +1,6 @@
 export default {
 	name: 'Adrenaline',
+	zh: '肾上腺素',
 	type: 'skill',
 	energy: 0,
 	damage: 0,
@@ -18,7 +19,7 @@ export default {
 			},
 		},
 	],
-	description: 'Gain 1 Energy. Draw 2 cards. Exhaust.',
+	description: '获得 1 点能量。抽 2 张牌。消耗。',
 	image: 'serpentine-dancer.jpg',
 	exhaust: true,
 }
@@ -28,6 +29,6 @@ export const upgrade = (card) => {
 	a.parameter.amount = 2
 	return {
 		...card,
-		description: 'Gain 2 Energy. Draw 2 cards. Exhaust.',
+		description: '获得 2 点能量。抽 2 张牌。消耗。',
 	}
 }

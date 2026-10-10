@@ -5,9 +5,9 @@ import {bosses, elites, monsters} from '../../content/monster-rooms.js'
 import {Monster} from '../components/player.js'
 
 const tiers = [
-	{name: 'Monsters', data: monsters},
-	{name: 'Elites', data: elites},
-	{name: 'Bosses', data: bosses},
+	{name: '普通怪物', data: monsters},
+	{name: '精英', data: elites},
+	{name: '首领', data: bosses},
 ]
 
 const gameState = {
@@ -19,14 +19,14 @@ const gameState = {
 
 <script src="../components/img-sprite.js"></script>
 
-<Layout title="Monster sprites">
+<Layout title="怪物图鉴 · 层城">
   <div class="Container">
-    <p><a class="Button" href="/">&larr; Menu</a></p>
+    <p><a class="Button" href="./index.html">&larr; 返回</a></p>
 
     <div class="Box">
-    	<h2>Monsters</h2>
-        <p>A list of all the <em>monster rooms</em> in the game grouped into "Monsters", "Elites" and "Boss".</p>
-        <p>Also see <a href="/sprites">sprites</a>.</p>
+    	<h2>怪物图鉴</h2>
+        <p>游戏里所有怪物房间的列表，按「普通怪物」「精英」「首领」分档。</p>
+        <p>每个房间名下方是该场遭遇会同时出现的怪物，以及它们的血量与行动意图。</p>
     </div>
 
     <div class="MonsterRooms">
@@ -45,9 +45,11 @@ const gameState = {
                     ))}
                   </div>
                 </div>
-              ))}
+            )
+          )}
             </div>
         )
       })}
+    </div>
     </div>
     </Layout>

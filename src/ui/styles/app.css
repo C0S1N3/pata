@@ -12,7 +12,7 @@ html {
 	background-size: cover;
 	background-repeat: no-repeat;
 	color: var(--text);
-	cursor: url(/images/cursors/default.png), auto;
+	cursor: url(../images/cursors/default.png), auto;
 }
 
 body {
@@ -229,7 +229,7 @@ tbody {
 .Hand .Card {
 	margin-left: -1.5rem;
 	cursor:
-		url(/images/cursors/grab-open.png) 10 0,
+		url(../images/cursors/grab-open.png) 10 0,
 		grab;
 }
 .Hand .Card[disabled] {
@@ -385,7 +385,7 @@ tbody {
 }
 .CardBox {
 	cursor:
-		url(/images/cursors/grab-open.png) 10 0,
+		url(../images/cursors/grab-open.png) 10 0,
 		pointer;
 }
 

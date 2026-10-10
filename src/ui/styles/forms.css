@@ -3,7 +3,7 @@ textarea,
 select {
 	font-family: inherit;
 	cursor:
-		url(/images/cursors/select.png) 10 0,
+		url(../images/cursors/select.png) 10 0,
 		auto;
 }
 
@@ -23,7 +23,7 @@ a,
 button,
 summary {
 	cursor:
-		url(/images/cursors/point.png) 10 0,
+		url(../images/cursors/point.png) 10 0,
 		auto;
 }
 

@@ -9,6 +9,7 @@
 /** @type {Deck} */
 export const deck1 = {
 	id: 'classic',
+	zh: '经典牌组',
 	name: 'Classic',
 	cards: ['Defend', 'Defend', 'Defend', 'Defend', 'Strike', 'Strike', 'Strike', 'Strike', 'Strike', 'Bash'],
 }
@@ -16,6 +17,7 @@ export const deck1 = {
 /** @type {Deck} */
 export const deck2 = {
 	id: 'one-of-each',
+	zh: '每种一张',
 	name: 'One of each',
 	cards: [
 		'Adrenaline',

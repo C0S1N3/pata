@@ -1,9 +1,10 @@
 export default {
 	name: 'Voodoo Gift',
+	zh: '巫毒赠礼',
 	energy: 0,
 	type: 'attack',
 	target: 'enemy',
-	description: "Deal damage equal to target's Vulnerable and Weak and remove the debuffs.",
+	description: "造成等同于目标易伤与虚弱层数之和的伤害，并清除这些负面状态。",
 	image: 'voodoo-education.png',
 	actions: [
 		{
@@ -42,6 +43,6 @@ export const upgrade = (card) => {
 	return {
 		...card,
 		damage: 9,
-		description: `${card.description} but without resets.`,
+		description: `${card.description}（不再清除状态）`,
 	}
 }

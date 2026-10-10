@@ -3,73 +3,76 @@ import Layout from '../layouts/Layout.astro'
 import '../styles/index.css'
 ---
 
-<Layout title="Manual - Slay the Web">
+<Layout title="手册 · 层城">
   <div class="Container">
-		<p><a class="Button" href="/">&larr; Menu</a></p>
+		<p><a class="Button" href="./index.html">&larr; 返回</a></p>
     <header class="Header">
-   		<h1>Slay the Web Manual</h1>
+   		<h1>层城 · 手册</h1>
     </header>
     <div class="FlexGrid">
-    <div class="Box Box--text">
-      <p>
-        Slay the Web is a single player card game where you fight monsters to reach the end of the web. It's a
-        game of planning and knowing when to play which card.
-      </p>
-      <p>
-        Every turn you draw 5 cards from your draw pile. Most cards cost energy to play. Energy is refreshed
-        every turn.
-      </p>
-      <p>
-        Cards may deal damage to monsters, block enemy attacks or make them weak or vulnerable. They can heal
-        you and other things. You'll figure it out.
-      </p>
-      <p>
-        Beware, whenever you end your turn, the monsters take turn. Above each target you'll get a hint which
-        action it will take on it's upcoming turn.
-      </p>
-      <p>
-        Should you manage to kill the monsters in a room before they end you, you'll proceed to the next room.
-        Maybe there will be rewards. Can you reach the end?
-      </p>
+      <div class="Box Box--text">
+        <p>
+          《层城》是一款单人卡牌游戏。你要一路打穿地牢，组建牌组，击败最后的首领。这游戏比拼的是规划，
+          以及判断什么时候该打出哪张牌。
+        </p>
+        <p>每回合从抽牌堆抽 5 张牌。多数卡牌需要消耗能量才能打出，能量每回合开始时补满。</p>
+        <p>
+          卡牌可以造成伤害、格挡敌人攻击，或让它们陷入虚弱与易伤。它们还能回血，以及做些别的事。
+          摸索一下自然就懂了。
+        </p>
+        <p>
+          注意：每次你结束回合，怪物就该动手了。每个目标上方都会显示它下一回合打算做什么——
+          记得先看一眼再决定怎么出牌。
+        </p>
+        <p>
+          如果你能在被解决掉之前清光房间里的怪物，就能前往下一个房间。也许会有奖励。你能走到最后吗？
+        </p>
+      </div>
+      <div class="Box Box--text">
+        <p>
+          觉得自带牌组不顺手，可以去<a href="./deck-builder.html">牌组编辑器</a>自己组一套。
+          自定义牌组只存在你自己的浏览器里，不会上传。
+        </p>
+        <p>另有<a href="./collection.html">卡牌图鉴</a>与<a href="./monsters.html">怪物图鉴</a>可查。</p>
+      </div>
+      <div class="Box Box--text">
+        <p>
+          浏览器开发者工具里几乎能改动这个游戏的一切，多半会玩出些奇怪而有趣的效果。
+        </p>
+        <p>打开控制台输入 <code>stw</code> 或 <code>stw.help()</code>。</p>
+      </div>
     </div>
+
+    <header class="Header">
+      <h2>授权与来源</h2>
+    </header>
+    <div class="FlexGrid">
       <div class="Box Box--text">
         <p>
-          All credit to the original
-					<a href="https://www.megacrit.com" rel="noreferrer" target="_blank">Slay the Spire game</a>
+          本作是开源游戏
+          <a href="https://github.com/oskarrough/slaytheweb" rel="noreferrer" target="_blank">Slay the Web</a>
+          的简体中文版。原版由 oskarrough 及贡献者以 <strong>AGPL-3.0</strong> 授权发布，
+          依照该授权，本修改版同样以 AGPL-3.0 发布，完整源码随作品提供：
+          <a href="./source/cengcheng-src.zip" download>下载源码包（zip）</a>。
+          你可以查看、修改并再分发它。
+        </p>
+        <p>
+          玩法灵感来自 Mega Crit 的
+          <a href="https://www.megacrit.com" rel="noreferrer" target="_blank">Slay the Spire</a>。
+          本作未使用其任何美术或文本资源，与 Mega Crit 无隶属关系。
         </p>
       </div>
       <div class="Box Box--text">
         <p>
-          <a href="https://github.com/oskarrough/slaytheweb" rel="noreferrer" target="_blank"
-            >This game is open source</a
-          >. It'd be wonderful with more contributors, it's (relatively) straight forward to for example, add
-          new cards, monsters or fights.
+          <strong>美术资源</strong>：32rogues 像素素材包（Copyright 2024 Seth Boyles，允许用于商业与非商业项目，
+          禁止再分发素材包本身）、<a href="https://game-icons.net" rel="noreferrer" target="_blank">game-icons.net</a>
+          （CC BY 3.0），以及 fromoldbooks.org、oldbookart.com 的古籍扫描（公有领域）。
+          楼层背景图为本站另行绘制。
         </p>
-      </div>
-      <div class="Box Box--text">
         <p>
-          Come chat on
-          <a href="https://matrix.to/#/#slaytheweb:matrix.org" rel="noreferrer" target="_blank">
-            #slaytheweb:matrix.org
-          </a>
+          <strong>字体</strong>：上游原版引用的 Heliotrope 为商业授权字体，本站没有分发授权，
+          已替换为系统中文字体栈。
         </p>
-      </div>
-      <div class="Box Box--text">
-        <p>
-				You can create your own deck (but not yet cards) using the <a href="/deck-builder">deck builder</a>. oh wait, you CAN create your own cards. Join the chat, find the repo, open an issue, write me, happy if we can get more original content.
-      </div>
-      <div class="Box Box--text">
-        <p>
-          You can inspect &mdash; and modify &mdash; pretty much anything in the game using the browser's
-          developer tools. This can definitity cause weird and fun behaviours.
-        </p>
-        <p>Open the console and type <code>stw</code> or <code>stw.help()</code>.</p>
-      </div>
-      <div class="Box Box--text">
-        <p>Check the <a href="/map-demo">map component demo</a>!</p>
-      </div>
-      <div class="Box Box--text">
-        <p>Read the <a href="/changelog">changelog</a>.</p>
       </div>
     </div>
   </div>

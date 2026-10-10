@@ -1,5 +1,6 @@
 export default {
 	name: 'Terror',
+	zh: '恐惧',
 	type: 'skill',
 	energy: 1,
 	damage: 0,
@@ -7,7 +8,7 @@ export default {
 	powers: {
 		vulnerable: 99,
 	},
-	description: 'Apply 99 Vulnerable. Exhaust.',
+	description: '施加 99 层易伤。消耗。',
 	image: '2.jpg',
 	exhaust: true,
 }

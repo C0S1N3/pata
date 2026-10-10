@@ -4,7 +4,9 @@ import {toggleMute} from '../sounds.js'
 
 // @ts-expect-error
 const abandonGame = () => {
-	window.location.href = window.location.origin
+	// 只保留路径，丢掉存档用的 hash 与查询串。不能用 location.origin：
+	// 玩具页挂在 /toy/<slug>/ 下，origin 是 bilibili 主站根域。
+	window.location.href = window.location.pathname
 }
 
 /** @typedef {import('../../game/new-game.js').Game} Game */
@@ -34,16 +36,16 @@ export default function Menu({gameState}) {
 						<button
 							class="Button"
 							onClick=${() => saveToUrl(gameState)}
-							title="Your save game will be stored in the URL. Copy it"
+							title="进度会存进网址里，复制它即可保留"
 						>
-							Save game
+							保存进度
 						</button>
 					</li>
 					<li>
-						<button class="Button" danger onClick=${() => abandonGame()}>Abandon game</button>
+						<button class="Button" danger onClick=${() => abandonGame()}>放弃本局</button>
 					</li>
 					<li>
-						<label>Sound <input type="checkbox" checked=${!muted} onClick=${() => toggleSound()} /></label>
+						<label>音效 <input type="checkbox" checked=${!muted} onClick=${() => toggleSound()} /></label>
 					</li>
 				</ul>
 			</div>

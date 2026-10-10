@@ -5,25 +5,25 @@ export default function startTutorial() {
 	const steps = [
 		{
 			popover: {
-				title: 'Greetings',
-				description: 'This is a very short introduction to Slay the Web. Follow me... (press enter)',
+				title: '欢迎',
+				description: '这是一份极简上手指引，跟着我走一遍。（按回车继续）',
 			},
 		},
 		{
 			element: '.Target[data-type="player"]',
-			popover: {align: 'center', description: 'This is you. Try not to lose all your health.'},
+			popover: {align: 'center', description: '这是你。别让生命值掉光。'},
 		},
 		{
 			element: '.Hand .Cards',
-			popover: {align: 'center', description: 'You have drawn 5 cards. Playing cards cost energy.'},
+			popover: {align: 'center', description: '你抽了 5 张牌。出牌需要消耗能量。'},
 		},
 		{
 			element: '.EnergyBadge',
-			popover: {description: 'You have 3 energy. It refreshes every turn.'},
+			popover: {description: '你有 3 点能量，每回合开始时补满。'},
 		},
 		{
 			element: '.EndTurn',
-			popover: {description: 'Ending your turn will allow the monster(s) to do their thing.'},
+			popover: {description: '结束回合后，怪物就该动手了。'},
 		},
 	]
 	const enemies = document.querySelectorAll('.Target[data-type="enemy"]')
@@ -33,12 +33,12 @@ export default function startTutorial() {
 			popover: {
 				align: 'center',
 				position: 'left',
-				description: 'This is an enemy. Throw cards at it until it dies.',
+				description: '这是敌人。拿牌砸它，直到它倒下。',
 			},
 		})
 	})
-	steps.push({popover: {description: 'The rest you must figure out yourself. Good luck!'}})
+	steps.push({popover: {description: '剩下的自己摸索吧。祝你好运。'}})
 
-	const intro = driver({allowClose: false, nextBtnText: 'OK', showButtons: ['next'], steps})
+	const intro = driver({allowClose: false, nextBtnText: '知道了', showButtons: ['next'], steps})
 	intro.drive()
 }

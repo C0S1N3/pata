@@ -2,7 +2,8 @@ import {range, shuffle} from '../utils.js'
 
 /**
  * @typedef MONSTER
- * @prop {string} [name] - Display name for the monster
+ * @prop {string} [name] - 逻辑名，不要翻译
+ * @prop {string} [zh] - 中文显示名
  * @prop {string} [sprite] - Sprite ID from monsters.txt (e.g., "7.c")
  * @prop {number} [hp]
  * @prop {number} [currentHealth]
@@ -43,6 +44,7 @@ export function Monster(
 
 	return {
 		name: props.name,
+		zh: props.zh,
 		sprite: props.sprite,
 		currentHealth: props.hp || props.currentHealth,
 		maxHealth: props.hp || props.maxHealth,
