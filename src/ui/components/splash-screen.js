@@ -57,7 +57,7 @@ export default class SplashScreen extends Component {
 			<article class="Splash Container Container--vcenter">
 				<img class="Splash-spoder" src="./images/spoder.png" title="你来啦" />
 				<div class="Box">
-					<h1 class="Title Splash-title">层城</h1>
+					<h1 class="Title Splash-title">爬塔</h1>
 					<ul class="Options">
 						${
 							location.hash

@@ -1,5 +1,5 @@
 /**
- * 把本仓库的完整源码打包成仓库根目录下的 cengcheng-src.zip。
+ * 把本仓库的完整源码打包成仓库根目录下的 pata-src.zip。
  *
  * AGPL-3.0 第 13 条要求：通过网络提供修改版服务的人，必须向使用者提供
  * 对应的完整源码。这个包就是用来履行该义务的交付物。
@@ -16,8 +16,8 @@ import path from 'node:path'
 import {deflateRawSync} from 'node:zlib'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
-const OUT = path.join(ROOT, 'cengcheng-src.zip')
-const PREFIX = 'cengcheng-src/'
+const OUT = path.join(ROOT, 'pata-src.zip')
+const PREFIX = 'pata-src/'
 
 // 需要随源码分发的路径（文件或目录）
 const INCLUDE = [
