@@ -1,116 +1,71 @@
-# Slay the Web
+# 爬塔
 
-A single player deck-building roguelike video card game for the web based on Slay The Spire,  
-a fantastic video game designed by [MegaCrit](https://www.megacrit.com/).
+《爬塔》是一款网页端单人牌组构筑（DBG）地牢爬行游戏，简体中文。
 
-### [Play on slaytheweb.cards](https://www.slaytheweb.cards/)
+**在线游玩**：[Bilibili Toy](https://www.bilibili.com/toy/pata/index.html)
 
-### [Chat on #slaytheweb:matrix.org](https://matrix.to/#/#slaytheweb:matrix.org)
+本项目是 [Slay the Web](https://github.com/oskarrough/slaytheweb) 的简体中文修改版。
+本仓库即该修改版的完整源码。
 
-<a href="https://slaytheweb.cards"><img src="https://i.imgur.com/m9CRCsa.png" alt="Screenshot of Slay the Web" width="640"></a>
+## 与上游的关系
 
-## Background
+- 上游项目：[oskarrough/slaytheweb](https://github.com/oskarrough/slaytheweb)（AGPL-3.0）
+- 上游版本：v0.25.0，以提交 `chore: import slaytheweb upstream` 原样导入
+- 玩法灵感来自 Mega Crit 的 [Slay the Spire](https://www.megacrit.com/)。
+  本项目未使用其任何美术或文本资源，与其无隶属关系，未获其授权或背书。
 
-After many runs in the Spire, I got into the theory behind the game. Inspired by the STS modding community, I thought it'd be fun and a great learning experience to try and implement the core logic of the game in JavaScript for the web. And that is what _Slay the Web_ is: a kind of stable, UI agnostic game engine with an example UI for the web.
+**许可**：AGPL-3.0。本修改版同样以 AGPL-3.0 发布，你可以查看、修改并再分发。
 
-## Updates
+改动清单见 [NOTICE.md](./NOTICE.md)。概要：
 
-See the CHANGELOG.md file.
+1. **汉化**——卡牌、怪物、能力、界面、手册、教学全部译为简体中文。
+   逻辑标识符（卡牌 `name`、效果 `type`/`target`、`powers` 键名等）保持英文，
+   中文名存放在 `zh` 字段，由 `src/i18n.js` 在展示层取用，因此上游测试全部通过。
+2. **移除外部依赖**——删除 Sentry 错误上报、对局上报接口、Heliotrope 商业字体引用。
+3. **替换素材**——移除未获授权的电影截图与画作，改用自行绘制的楼层背景。
+4. **适配静态托管**——构建产物改为相对路径，以适配子目录挂载。
 
-## Development
+## 构建
 
-TLDR;
+需要 Node.js 20.19+ 或 22.12+。
 
-1. Clone the repository
-2. Run `npm install` followed by `npm run dev` to open a local development server.
+```bash
+npm install
+npm run build:toy     # 构建到 dist/，并在仓库根目录生成源码压缩包
+npm run dev           # 本地开发服务器
+npm test              # 运行测试
+```
 
-## Documentation
+产物是纯静态文件，可直接部署到任意静态托管或子目录。
 
-If you're interested in contributing to the game or merely curious how it works:
+## 目录
 
-- [The documentation](DOCUMENTATION.md)
+- `src/content` — 卡牌、怪物、地牢的**数据**
+- `src/game` — 与界面无关的游戏逻辑（状态、动作、条件、能力）
+- `src/ui` — 界面层（Astro + Preact + web components）
+- `public` — 静态资源
+- `tests` — 游戏逻辑测试
+- `scripts/pack-source.mjs` — 打包 AGPL 源码交付物
 
-Or browse the code. Especially the game logic includes tons of comments.
+架构说明见 [DOCUMENTATION.md](./DOCUMENTATION.md)。
 
-See the [open issues](https://github.com/oskarrough/slaytheweb/issues).  
-Have an idea? Please [open a new issue](https://github.com/oskarrough/slaytheweb/issues/new).
-
-There are many areas that would make it more fun to play:
-
-- new cards
-- new powers
-- more monsters
-- expand the map into multiple "worlds" (or acts...)
-- better UI and animations
-- optimize UI for mobile
-
-## How to release a new version (aka deploy)
-
-Every commit to the `main` branch automatically deploys to https://slaytheweb.cards via Cloudflare.
-
-If you open a PR, it'll give you a preview URL where we can see if things are as expected.
-
-To update the `CHANGELOG.md`, run `bun run release` and follow the prompts. We do not use GitHub releases.
-
-## References
+## 上游参考
 
 <details>
-  <summary>A collection of related links, inspiration and ideas.</summary>
+<summary>Slay the Spire 相关的模组工具与资料</summary>
 
-- FTL, Into The Breach, Darkest Dungeon, Dungeon of the Endless, Spelunky, Rogue Legacy,
-- [Pollywog Games: A history of roguelite deck building games](https://pollywog.games/rgdb/)
-- http://stfj.net/index2.php?project=art/2011/Scoundrel.pdf
-- http://stfj.net/index2.php?year=2018&project=art/2018/Pocket-Run%20Pool
-- http://www.cardcrawl.com/
-- http://www.cardofdarkness.com/
-- https://freesound.org/
-- https://game-icons.net/
-- https://github.com/RonenNess/RPGUI
-- https://hundredrabbits.itch.io/donsol [Source](https://github.com/hundredrabbits/Donsol/tree/master/desktop/sources/scripts)
-- https://itch.io/games/tag-card-game/tag-roguelike
-- https://nathanwentworth.itch.io/deck-dungeon [Source](https://github.com/nathanwentworth/deck-dungeon/)
-- https://www.reddit.com/r/slaythespire/comments/a7lhpq/any_recommended_games_similar_to_slay_the_spire/
-- https://twitter.com/fabynou/status/1212534790672408578
-- https://www.gamasutra.com/blogs/JoshGe/20181029/329512/How_to_Make_a_Roguelike.php
-- https://www.reddit.com/r/roguelikedev/
-- https://www.reddit.com/r/roguelikes/
-- https://klei.com/games/griftlands
-- https://forgottenarbiter.github.io/Is-Every-Seed-Winnable/
-- https://www.cloudfallstudios.com/blog/2020/11/2/game-design-tips-reverse-engineering-slay-the-spires-decisions
-- https://www.cloudfallstudios.com/blog/2018/5/7/guide-deckbuilder-tips-for-beginners-prompts-for-the-experienced-part-23
-- https://mitadmissions.org/blogs/entry/slay-the-spire-as-metaphor/
-
-### Slay the Spire modding, tools and things
-
-- https://en.wikipedia.org/wiki/Slay_the_Spire
-- https://slay-the-spire.fandom.com/wiki/Slay_the_Spire_Wiki
-- https://spirelogs.com/
-- https://maybelatergames.co.uk/tools/slaythespire/
-- https://github.com/daviscook477/BaseMod
-- https://github.com/Gremious/StS-DefaultModBase
-- https://github.com/Gremious/StS-DefaultModBase/wiki
-- https://github.com/kiooeht/Hubris/
-- https://github.com/kiooeht/StSLib/wiki/Power-Hooks
-- https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics
-- https://github.com/Dementophobia/slay-the-spire-sensei
-- https://www.rockpapershotgun.com/2018/02/19/why-revealing-all-is-the-secret-of-slay-the-spires-success/
-- [Slay the Spire Reference spreadsheet](https://docs.google.com/spreadsheets/u/1/d/1ZsxNXebbELpcCi8N7FVOTNGdX_K9-BRC_LMgx4TORo4/edit?usp=sharing)
-- [Slay the Spire Discord](https://discord.gg/slaythespire)
-- https://github.com/adnzzzzZ/blog
-- https://forgottenarbiter.github.io/Is-Every-Seed-Winnable/ ([discussion](https://news.ycombinator.com/item?id=23910006))
-- https://www.twitch.tv/telnetthespire
-- [Slay the Spire Reference Spreadsheet](https://docs.google.com/spreadsheets/u/1/d/1ZsxNXebbELpcCi8N7FVOTNGdX_K9-BRC_LMgx4TORo4/edit#gid=1146624812)
-- https://alexdriedger.github.io/SlayTheSpireModding/
-
-### Typeface
-
-Licenced from https://mbtype.com/
-
-### Open source artwork
-
-- http://ronenness.github.io/RPGUI/
-- https://github.com/game-icons/icons
-- https://www.fromoldbooks.org/
-- https://www.oldbookart.com/
+- [Slay the Spire Wiki](https://slay-the-spire.fandom.com/wiki/Slay_the_Spire_Wiki)
+- [SlayTheSpireModding](https://alexdriedger.github.io/SlayTheSpireModding/)
+- [Is Every Seed Winnable?](https://forgottenarbiter.github.io/Is-Every-Seed-Winnable/)
+- [BaseMod](https://github.com/daviscook477/BaseMod)
+- [StSLib](https://github.com/kiooeht/StSLib/wiki/Power-Hooks)
+- [A history of roguelite deck building games](https://pollywog.games/rgdb/)
 
 </details>
+
+### 开放素材
+
+- [32rogues](public/images/characters/32rogues/LICENSE.txt) — Copyright 2024 Seth Boyles
+- [game-icons.net](https://game-icons.net/) — CC BY 3.0
+- [fromoldbooks.org](https://www.fromoldbooks.org/)、[oldbookart.com](https://www.oldbookart.com/) — 公有领域古籍扫描
+- 楼层背景图为本项目自行绘制
