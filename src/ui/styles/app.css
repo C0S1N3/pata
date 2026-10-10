@@ -73,40 +73,45 @@ tbody {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("/images/scenes/moonlit-landscape-1904.jpg");
+	/*
+	 * 资源路径写 "../" 而非 "./"：本文件最终被打包到 dist/_astro/ 下，
+	 * 相对的是样式表自身的位置而不是页面位置，用 "./" 会解析到
+	 * /toy/<slug>/_astro/images/ 从而 404。
+	 */
+	background-image: url("../images/scenes/base-stairs.jpg");
 }
 .App-background[data-room-index="1"] {
-	background-image: url("/images/scenes/arietty.webp");
+	background-image: url("../images/scenes/base-stairs.jpg");
 }
 .App-background[data-room-index="2"] {
-	background-image: url("/images/scenes/bauhaus.jpg");
+	background-image: url("../images/scenes/dark-corridor.jpg");
 }
 .App-background[data-room-index="3"] {
-	background-image: url("/images/scenes/chihiro.jpg");
+	background-image: url("../images/scenes/scriptorium.jpg");
 }
 .App-background[data-room-index="4"] {
-	background-image: url("/images/scenes/howl.jpg");
+	background-image: url("../images/scenes/scriptorium.jpg");
 }
 .App-background[data-room-index="5"] {
-	background-image: url("/images/scenes/laputa.jpg");
+	background-image: url("../images/scenes/lantern-hall.jpg");
 }
 .App-background[data-room-index="6"] {
-	background-image: url("/images/scenes/mononoke.jpg");
+	background-image: url("../images/scenes/lantern-hall.jpg");
 }
 .App-background[data-room-index="7"] {
-	background-image: url("/images/scenes/nausicaa.jpg");
+	background-image: url("../images/scenes/cloud-terrace.jpg");
 }
 .App-background[data-room-index="8"] {
-	background-image: url("/images/scenes/1.jpg");
+	background-image: url("../images/scenes/cloud-terrace.jpg");
 }
 .App-background[data-room-index="9"] {
-	background-image: url("/images/scenes/landscape.jpg");
+	background-image: url("../images/scenes/summit-gate.jpg");
 }
 .App-background[data-room-index="10"] {
-	background-image: url("/images/scenes/flying-duo.jpg");
+	background-image: url("../images/scenes/summit-gate.jpg");
 }
 .App-background[data-room-index="11"] {
-	background-image: url("/images/scenes/ponyo.jpg");
+	background-image: url("../images/scenes/summit-gate.jpg");
 }
 
 /* Darkens the top of the screen to highlight the player+monsters on the background. */

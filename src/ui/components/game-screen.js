@@ -20,7 +20,6 @@ import DungeonStats from './dungeon-stats.js'
 import Menu from './menu.js'
 import {Overlay, OverlayWithButton} from './overlays.js'
 import {Monster, Player} from './player.js'
-import {PublishRun} from './publish-run.js'
 import {SlayMap} from './slay-map.js'
 import StartRoom from './start-room.js'
 import VictoryRoom from './victory-room.js'
@@ -429,8 +428,7 @@ export default class App extends Component {
 					this.isDead &&
 					html`<${Overlay} middle>
 						<div class="Container">
-							<h1 center>You are dead</h1>
-							<${PublishRun} game=${this.game}><//>
+							<h1 center>你死了</h1>
 							<${DungeonStats} dungeon=${state.dungeon}><//>
 							<button class="Button" onClick=${() => this.props.onLoose()}>Try again?</button>
 						</div>
@@ -441,8 +439,7 @@ export default class App extends Component {
 					state.won &&
 					html`<${Overlay} middle>
 						<div class="Container CContainer--center">
-							<h1 center>You won!</h1>
-							<${PublishRun} game=${this.game}><//>
+							<h1 center>你赢了！</h1>
 							<${DungeonStats} dungeon=${state.dungeon}><//>
 							<p center><button class="Button" onClick=${() => this.props.onWin()}>Continue</button></p>
 						</div>
