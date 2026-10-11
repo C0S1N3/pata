@@ -263,3 +263,34 @@
 		font-size: 3.2rem;
 	}
 }
+
+/* ── 弹层里的卡牌（两种手机朝向通用）─────────────────────────
+ * 手牌受「5 张要装进屏内」的硬约束只能做小，但弹层（卡牌奖励、牌组查看、
+ * 卡牌图鉴）是全屏可滚动的，没有这个约束——卡牌该放大到描述能排得下。
+ * 否则玩家在奖励界面选牌时，同样读不全卡牌效果。
+ */
+@media (max-width: 560px), (max-height: 500px) {
+	/*
+	 * 弹层遮罩加厚。上游的 0.7 在桌面上够用（桌面元素本来就小），
+	 * 但手机上卡牌奖励/篝火是满屏弹层，底下的手牌和血条会透出来和
+	 * 弹层内容混在一起，看不清。
+	 */
+	.Overlay[open] .Overlay-bg {
+		background: hsla(0, 0%, 0%, 0.92);
+	}
+
+	.Overlay[open] .Card {
+		--card-width: 7.4em;
+		--card-height: 12.2em;
+	}
+	.Overlay[open] .Card-media img {
+		height: 76px;
+	}
+	.Overlay[open] .Card-name {
+		font-size: 0.95rem;
+	}
+	.Overlay[open] .Card-description {
+		font-size: 0.8rem;
+		min-height: 2em;
+	}
+}
