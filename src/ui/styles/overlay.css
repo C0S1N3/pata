@@ -100,3 +100,59 @@
 	gap: 1rem;
 	flex-wrap: wrap;
 }
+
+/*
+ * 放大查看一张卡。
+ *
+ * 手机上 5 张手牌挤在 390px 宽的屏里，长描述的卡（「巫毒赠礼」30 字）
+ * 在卡面上只能显示一半，玩家没法据此决定出哪张。点手牌弹出这张大卡看全。
+ *
+ * 尺寸用「高度定、宽度按卡牌 10:17 比例推导」：竖屏高度充裕、横屏宽度充裕，
+ * 以高度为基准两种朝向都不会溢出。卡图占卡高 38%，其余留给卡名与描述。
+ */
+.CardInspect {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.7rem;
+	padding: 0.75rem;
+	background: hsla(0, 0%, 0%, 0.82);
+	cursor: pointer;
+}
+
+.CardInspect-card .Card {
+	--card-inspect-h: min(21em, 68vh);
+	width: calc(var(--card-inspect-h) * 0.588);
+	height: var(--card-inspect-h);
+	flex-shrink: 0;
+}
+
+.CardInspect-card .Card-media img {
+	height: calc(var(--card-inspect-h) * 0.38);
+}
+
+.CardInspect-card .Card-name {
+	font-size: 1.15rem;
+	padding: 0.4rem 0 0.1rem;
+}
+
+.CardInspect-card .Card-type {
+	font-size: 0.8rem;
+}
+
+.CardInspect-card .Card-description {
+	font-size: 1rem;
+	min-height: 2em;
+	line-height: 1.25;
+}
+
+.CardInspect-hint {
+	margin: 0;
+	color: var(--text);
+	opacity: 0.7;
+	font-size: 0.85rem;
+} 

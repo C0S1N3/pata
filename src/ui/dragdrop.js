@@ -30,14 +30,22 @@ function canDropOnTarget(target, targetEl) {
  *
  * @param {Element} container
  * @param {Function} afterRelease
+ * @param {Function} [onInspect] - 点击（而非拖拽）卡牌时调用，用于放大查看卡面
  */
-export default function enableDragDrop(container, afterRelease) {
+export default function enableDragDrop(container, afterRelease, onInspect) {
 	/** @type {NodeListOf<HTMLElement>} */
 	const targets = container.querySelectorAll('.Target')
 	const cards = container.querySelectorAll('.Hand .Card')
 
 	cards.forEach((card) => {
 		Draggable.create(card, {
+			// 点击与拖拽要分得开：手指在窄屏上放大卡面看效果是刚需，
+			// 但只要发生位移就是出牌，不能再弹详情。GSAP 的 onClick 只在
+			// 几乎没有位移时触发，正好是这个语义。
+			onClick() {
+				if (onInspect) onInspect(card.dataset.id)
+			},
+
 			onDragStart() {
 				// Kill any animations trying to move this card
 				gsap.killTweensOf(this.target)

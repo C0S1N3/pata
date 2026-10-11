@@ -14,7 +14,7 @@ import * as sounds from '../sounds.js'
 // UI Components
 import './img-sprite.js'
 import CampfireRoom from './campfire.js'
-import Cards from './cards.js'
+import Cards, {Card} from './cards.js'
 import Console from './console.js'
 import DungeonStats from './dungeon-stats.js'
 import Menu from './menu.js'
@@ -47,6 +47,7 @@ export default class App extends Component {
 
 		// Scope methods
 		this.playCard = this.playCard.bind(this)
+		this.inspectCard = this.inspectCard.bind(this)
 		this.handlePlayerReward = this.handlePlayerReward.bind(this)
 		this.handleCampfireChoice = this.handleCampfireChoice.bind(this)
 		this.goToNextRoom = this.goToNextRoom.bind(this)
@@ -226,7 +227,7 @@ export default class App extends Component {
 		// Update state and re-enable dragdrop
 		const cardIdsBefore = new Set(this.state.hand.map((c) => c.id))
 		this.update(() => {
-			enableDragDrop(this.base, this.playCard)
+			enableDragDrop(this.base, this.playCard, this.inspectCard)
 			sounds.playCard({card})
 
 			// Animate cloned card away
@@ -290,13 +291,24 @@ export default class App extends Component {
 		}
 	}
 
+	/**
+	 * 放大查看一张手牌。
+	 *
+	 * 手机上 5 张手牌挤在 390px 宽里，长描述的卡（如「巫毒赠礼」30 字）
+	 * 在卡面上只能显示一半。点开看全，再点一次或点弹层任意处关闭。
+	 * 拖拽不受影响：GSAP 的 onClick 只在几乎没有位移时触发。
+	 */
+	inspectCard(cardId) {
+		this.setState({inspectedCardId: this.state.inspectedCardId === cardId ? null : cardId})
+	}
+
 	// Animate the cards in and make sure any new cards are draggable.
 	dealCards() {
 		const cards = this.base.querySelectorAll('.Hand .Card')
 		if (!cards?.length) return
 		gsap.effects.dealCards('.Hand .Card')
 		sounds.startTurn()
-		enableDragDrop(this.base, this.playCard)
+		enableDragDrop(this.base, this.playCard, this.inspectCard)
 	}
 
 	toggleOverlay(el) {
@@ -569,6 +581,22 @@ export default class App extends Component {
 					</div>
 					<figure class="Overlay-bg"></figure>
 				</div>
+
+				${
+					state.inspectedCardId &&
+					(() => {
+						const card = state.hand?.find((c) => c.id === state.inspectedCardId)
+						if (!card) return null
+						return html`
+							<div class="CardInspect" onClick=${() => this.setState({inspectedCardId: null})}>
+								<div class="CardInspect-card">
+									<${Card} card=${card} gameState=${state} />
+								</div>
+								<p class="CardInspect-hint">点击任意处关闭</p>
+							</div>
+						`
+					})()
+				}
 		</div>
 		`
 	}
